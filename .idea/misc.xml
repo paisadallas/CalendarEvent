@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.219" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32100052110474203" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.21693840579710144" />
+        <entry key="app/src/main/res/layout/fragment_consult.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_data.xml" value="0.21693840579710144" />
       </map>
     </option>

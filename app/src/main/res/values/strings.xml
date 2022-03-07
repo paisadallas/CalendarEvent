@@ -3,4 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_data">Events</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="add_button">Add</string>
+    <string name="et_category">Category</string>
+    <string name="et_event">Event</string>
+    <string name="title_calendar">Create event</string>
 </resources>
