@@ -15,6 +15,4 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
-    //sample branch
 }
