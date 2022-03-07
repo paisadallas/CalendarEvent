@@ -2,7 +2,7 @@ package com.john.calendarevent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.john.calendarevent.ui.fragments.DataFragment
+import com.john.calendarevent.views.DataFragment
 
 
 class MainActivity : AppCompatActivity() {
