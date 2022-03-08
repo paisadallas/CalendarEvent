@@ -14,10 +14,6 @@ class MainActivity : AppCompatActivity(), Communicator{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.main_fragment,)
-//            .addToBackStack(null)
-//            .commit()
     }
 
     override fun swithCalendarFragment() {
@@ -33,5 +29,4 @@ class MainActivity : AppCompatActivity(), Communicator{
             .addToBackStack(null)
             .commit()
     }
-
 }
