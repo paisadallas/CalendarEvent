@@ -1,5 +1,6 @@
 package com.john.calendarevent.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,8 @@ class EventAdapter (
     }
 
     override fun getItemCount(): Int = eventList.size
+
+
 }
 
 class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
