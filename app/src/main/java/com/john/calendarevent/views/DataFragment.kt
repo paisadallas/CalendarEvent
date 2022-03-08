@@ -1,13 +1,13 @@
 package com.john.calendarevent.views
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.john.calendarevent.R
 import com.john.calendarevent.adapter.EventAdapter
 import com.john.calendarevent.databinding.FragmentDataBinding
 import com.john.calendarevent.model.Event
@@ -27,8 +27,15 @@ class DataFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var communicator: Communicator
+    private  var c= 0
     private val binding by lazy {
         FragmentDataBinding.inflate(layoutInflater)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        communicator = activity as Communicator
     }
 
     private val eventAdapter by lazy {
@@ -54,8 +61,17 @@ class DataFragment : Fragment() {
             adapter = eventAdapter
         }
 
+        //ADDING NEW ITEM
+//        binding.btnAddEvent.setOnClickListener {
+//            eventAdapter.updateEventData(Event("id ${c}","hola ${c}","mundo","como"))
+//            c++
+//        }
+
+        //CALL FRAGMENT CALENDAR
         binding.btnAddEvent.setOnClickListener {
-            eventAdapter.updateEventData(Event("hola","mundo","como"))
+            //send data to MainActivity
+            communicator.swithCalendarFragment()
+
         }
         return binding.root
     }
@@ -79,4 +95,5 @@ class DataFragment : Fragment() {
                 }
             }
     }
+
 }
