@@ -1,6 +1,5 @@
 package com.john.calendarevent.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.john.calendarevent.R
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.model.Event
-import com.john.calendarevent.views.Communicator
 
 class EventAdapter (
     val eventAdapterListener: EventAdapterListener,
@@ -20,7 +18,6 @@ class EventAdapter (
     fun updateEventData(event: Event){
         eventList.add(0,event)
 
-        //Order Data Here
         notifyItemInserted(0)
         notifyDataSetChanged()
     }
@@ -41,8 +38,6 @@ class EventAdapter (
     override fun getItemCount(): Int = eventList.size
 }
 
-
-
 class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
 
     private val title : TextView = intentView.findViewById(R.id.tv_item_event)
@@ -55,5 +50,4 @@ class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
         calendary.text = event.calendar
         id=""
     }
-
 }

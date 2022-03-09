@@ -25,7 +25,7 @@ class ConsultFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var communicator: Communicator
+
 
     private val binding by lazy {
         FragmentConsultBinding.inflate(layoutInflater)
@@ -41,7 +41,7 @@ class ConsultFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        communicator = activity as Communicator
+
     }
 
     override fun onCreateView(
@@ -59,11 +59,15 @@ class ConsultFragment : Fragment() {
                 binding.tvItemCalendar.text = Data.listEvent[i].calendar
                 deleteItem = i
             }
+
         }
 
         binding.btDelete.setOnClickListener {
             Data.listEvent.removeAt(deleteItem)
-            communicator.swithDataFragment()
+            fragmentNavigation(
+                supportFragmentManager = requireActivity().supportFragmentManager,
+                DataFragment.newInstance("","")
+            )
         }
 
         return binding.root
