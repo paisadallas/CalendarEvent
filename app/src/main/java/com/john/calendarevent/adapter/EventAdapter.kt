@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.john.calendarevent.R
 import com.john.calendarevent.model.Event
+import com.john.calendarevent.views.Communicator
 
 class EventAdapter (
-
+    val communicator: Communicator,
     private val eventList:MutableList<Event> = mutableListOf()
 
         ): RecyclerView.Adapter<EventViewHolder>() {
+
 
     fun updateEventData(event: Event){
         eventList.add(0,event)
@@ -26,12 +28,14 @@ class EventAdapter (
         return EventViewHolder(eventView)
     }
 
+
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+
         val event = eventList[position]
         holder.itemView.setOnClickListener {
 
          Log.d("CLICK_EVENT", "CLICK ${event.id}")
-
+        communicator.swithConsultFragment()
         }
         holder.bind(event)
     }

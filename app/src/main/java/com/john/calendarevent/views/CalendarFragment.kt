@@ -13,6 +13,7 @@ import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentCalendarBinding
 import com.john.calendarevent.model.Event
 import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +33,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding : FragmentCalendarBinding
     private lateinit var communicator: Communicator
    //SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-    var sdf:SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,6 +63,7 @@ class CalendarFragment : Fragment() {
         }
 
             binding.calendarView.setOnDateChangeListener { p0, p1, p2, p3 ->
+               val id: UUID = UUID.randomUUID()
                 Log.d("DAY_CALENDAR", "$p1$p2$p3")
                 var title: String = binding.etEvent.text.toString()
                 var category: String = binding.etCategory.text.toString()
@@ -69,7 +71,7 @@ class CalendarFragment : Fragment() {
                 var date = "$p3/$p2/$p1"
 
                 binding.btOkEvent.setOnClickListener {
-                    var event: Event = Event("001", title, category, date)
+                    var event= Event(id.toString(), title, category, date)
                     Data.listEvent?.add(event)
                     communicator.swithDataFragment()
                 }

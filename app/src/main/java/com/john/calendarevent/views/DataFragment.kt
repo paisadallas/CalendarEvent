@@ -66,7 +66,7 @@ class DataFragment : Fragment() {
     }
 
     private val eventAdapter by lazy {
-        EventAdapter()
+        EventAdapter(communicator)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,11 +88,11 @@ class DataFragment : Fragment() {
             adapter = eventAdapter
         }
 
-        Log.d("LIST_SIZE",Data.listEvent?.size.toString())
+        Log.d("LIST_SIZE",Data.listEvent.size.toString())
 
-        for (i in 0 until (Data.listEvent?.size ?: 0)){
+        for (i in 0 until (Data.listEvent.size )){
 
-            eventAdapter.updateEventData(Data.listEvent?.get(i) ?: Event("E","E","E","E"))
+            eventAdapter.updateEventData(Data.listEvent[i])
         }
 
         //ADDING NEW ITEM
