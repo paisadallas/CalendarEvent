@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.john.calendarevent.R
 import com.john.calendarevent.data.Data
+import com.john.calendarevent.databinding.FragmentConsultBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +25,11 @@ class ConsultFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var communicator: Communicator
 
+    private val binding by lazy {
+        FragmentConsultBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +39,10 @@ class ConsultFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        communicator = activity as Communicator
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,17 +50,24 @@ class ConsultFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         Log.d("CONSULT_FRAMENT = ","${param1}")
-
+        var  deleteItem:Int =0
         for (i in 0 until (Data.listEvent.size )){
             if (Data.listEvent[i].id.equals(param1)){
                 Log.d("CONSULT_FRAGMENT_TITLE","${Data.listEvent[i].title}")
+                binding.tvTitle.text= Data.listEvent[i].title
+                binding.tvCategory.text = Data.listEvent[i].category
+                binding.tvItemCalendar.text = Data.listEvent[i].calendar
+                deleteItem = i
             }
-
         }
 
-        return inflater.inflate(R.layout.fragment_consult, container, false)
-    }
+        binding.btDelete.setOnClickListener {
+            Data.listEvent.removeAt(deleteItem)
+            communicator.swithDataFragment()
+        }
 
+        return binding.root
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

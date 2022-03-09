@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.john.calendarevent.R
+import com.john.calendarevent.data.Data
 import com.john.calendarevent.model.Event
 import com.john.calendarevent.views.Communicator
 
 class EventAdapter (
-    val communicator: Communicator,
+    val eventAdapterListener: EventAdapterListener,
     private val eventList:MutableList<Event> = mutableListOf()
 
         ): RecyclerView.Adapter<EventViewHolder>() {
@@ -21,6 +22,7 @@ class EventAdapter (
 
         //Order Data Here
         notifyItemInserted(0)
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val eventView = LayoutInflater.from(parent.context).inflate(R.layout.event_item,parent,false)
@@ -31,14 +33,15 @@ class EventAdapter (
         val event = eventList[position]
         holder.itemView.setOnClickListener {
 
-         Log.d("CLICK_EVENT", "CLICK ${event.id}")
-        communicator.swithConsultFragment("${event.id}")
+            eventAdapterListener.onFragmentCliked("${event.id}")
         }
         holder.bind(event)
     }
 
     override fun getItemCount(): Int = eventList.size
 }
+
+
 
 class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
 
@@ -52,4 +55,5 @@ class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
         calendary.text = event.calendar
         id=""
     }
+
 }
