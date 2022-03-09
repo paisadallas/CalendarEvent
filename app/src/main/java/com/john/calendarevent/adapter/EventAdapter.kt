@@ -16,7 +16,6 @@ class EventAdapter (
 
         ): RecyclerView.Adapter<EventViewHolder>() {
 
-
     fun updateEventData(event: Event){
         eventList.add(0,event)
 
@@ -28,9 +27,7 @@ class EventAdapter (
         return EventViewHolder(eventView)
     }
 
-
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-
         val event = eventList[position]
         holder.itemView.setOnClickListener {
 
