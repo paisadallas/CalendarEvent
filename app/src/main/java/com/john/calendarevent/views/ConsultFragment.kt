@@ -48,8 +48,8 @@ class ConsultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        Log.d("CONSULT_FRAMENT = ","${param1}")
+
+
         var  deleteItem:Int =0
         for (i in 0 until (Data.listEvent.size )){
             if (Data.listEvent[i].id.equals(param1)){
