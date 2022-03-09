@@ -29,7 +29,6 @@ class DataFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-
     private lateinit var eventAdapterListener: EventAdapterListener
     private  var c= 0
     private val binding by lazy {
@@ -41,7 +40,6 @@ class DataFragment : Fragment() {
 
         eventAdapterListener = activity as EventAdapterListener
 
-       // addAllList()
     }
 
     private val eventAdapter by lazy {
@@ -61,29 +59,18 @@ class DataFragment : Fragment() {
         }
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_data, container, false)
+
         binding.rvData.apply {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
             adapter = eventAdapter
         }
 
-        Log.d("LIST_SIZE",Data.listEvent.size.toString())
-
-
-        //CALL FRAGMENT CALENDAR
         binding.btnAddEvent.setOnClickListener {
-            //send data to MainActivity
-       //     Data.event_data="Event from DataFragment"
+
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
                 CalendarFragment.newInstance("","")
