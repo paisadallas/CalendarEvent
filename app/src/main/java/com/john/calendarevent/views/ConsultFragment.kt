@@ -2,11 +2,13 @@ package com.john.calendarevent.views
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.calendarevent.R
+import com.john.calendarevent.data.Data
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +40,15 @@ class ConsultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.d("CONSULT_FRAMENT = ","${param1}")
+
+        for (i in 0 until (Data.listEvent.size )){
+            if (Data.listEvent[i].id.equals(param1)){
+                Log.d("CONSULT_FRAGMENT_TITLE","${Data.listEvent[i].title}")
+            }
+
+        }
+
         return inflater.inflate(R.layout.fragment_consult, container, false)
     }
 

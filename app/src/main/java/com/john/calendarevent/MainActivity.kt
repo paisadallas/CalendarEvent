@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), Communicator{
     override fun swithConsultFragment(id:String) {
         Log.d("READING_ID=","${id}")
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment,ConsultFragment.newInstance("",""))
+            .replace(R.id.main_fragment,ConsultFragment.newInstance(id,""))
             .addToBackStack(null)
             .commit()
     }
