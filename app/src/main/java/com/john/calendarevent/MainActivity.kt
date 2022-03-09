@@ -7,33 +7,16 @@ import androidx.fragment.app.Fragment
 import com.john.calendarevent.adapter.EventAdapterListener
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.model.Event
-import com.john.calendarevent.views.CalendarFragment
-import com.john.calendarevent.views.Communicator
-import com.john.calendarevent.views.ConsultFragment
-import com.john.calendarevent.views.DataFragment
+import com.john.calendarevent.views.*
 
 
-class MainActivity : AppCompatActivity(), Communicator,EventAdapterListener{
+class MainActivity : AppCompatActivity(),EventAdapterListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-    }
+        fragmentNavigation(supportFragmentManager,DataFragment.newInstance("",""))
 
-    override fun swithCalendarFragment() {
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment,CalendarFragment.newInstance("",""))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun swithDataFragment() {
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment,DataFragment.newInstance("",""))
-            .addToBackStack(null)
-            .commit()
     }
 
     override fun onFragmentCliked(id: String) {

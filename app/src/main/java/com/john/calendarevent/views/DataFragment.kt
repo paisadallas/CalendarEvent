@@ -29,7 +29,7 @@ class DataFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var communicator: Communicator
+
     private lateinit var eventAdapterListener: EventAdapterListener
     private  var c= 0
     private val binding by lazy {
@@ -38,7 +38,7 @@ class DataFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        communicator = activity as Communicator
+
         eventAdapterListener = activity as EventAdapterListener
 
        // addAllList()
@@ -84,7 +84,10 @@ class DataFragment : Fragment() {
         binding.btnAddEvent.setOnClickListener {
             //send data to MainActivity
        //     Data.event_data="Event from DataFragment"
-            communicator.swithCalendarFragment()
+            fragmentNavigation(
+                supportFragmentManager = requireActivity().supportFragmentManager,
+                CalendarFragment.newInstance("","")
+            )
 
         }
         return binding.root

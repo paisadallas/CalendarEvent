@@ -31,7 +31,7 @@ class CalendarFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var binding : FragmentCalendarBinding
-    private lateinit var communicator: Communicator
+
    //SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class CalendarFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        communicator = activity as Communicator
+
     }
 
     override fun onCreateView(
@@ -59,10 +59,13 @@ class CalendarFragment : Fragment() {
 
          //   Data.event_data = "CalendarFragment"
           //  Log.d("READING_DATA","Reading data from Calendar: ${Data.event_data}")
-            communicator.swithDataFragment()
+           fragmentNavigation(
+               supportFragmentManager = requireActivity().supportFragmentManager,
+               DataFragment.newInstance("","")
+           )
         }
 
-            binding.calendarView.setOnDateChangeListener { p0, p1, p2, p3 ->
+            binding.calendarView.setOnDateChangeListener { _, p1, p2, p3 ->
                val id: UUID = UUID.randomUUID()
                 Log.d("DAY_CALENDAR", "$p1$p2$p3")
                 var title: String = binding.etEvent.text.toString()
@@ -72,14 +75,17 @@ class CalendarFragment : Fragment() {
 
                 binding.btOkEvent.setOnClickListener {
                     var event= Event(id.toString(), title, category, date)
-                    Data.listEvent?.add(event)
-                    communicator.swithDataFragment()
+                    Data.listEvent.add(event)
+                    fragmentNavigation(
+                        supportFragmentManager = requireActivity().supportFragmentManager,
+                        DataFragment.newInstance("","")
+                    )
                 }
 
             }
             // Log.d("DAY_CALENDAR",date)
 
-            Log.d("LIST_SIZE",Data.listEvent?.size.toString())
+            Log.d("LIST_SIZE",Data.listEvent.size.toString())
 
         return binding.root
     }
