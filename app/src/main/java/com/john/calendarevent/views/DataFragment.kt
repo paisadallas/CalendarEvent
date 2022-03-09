@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.john.calendarevent.adapter.EventAdapter
+import com.john.calendarevent.adapter.EventAdapterListener
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentDataBinding
 import com.john.calendarevent.model.Event
@@ -28,31 +29,8 @@ class DataFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    //DATA
-
-//    var event0: Event = Event("1","work","work","12/13/2022")
-//    var event1:Event = Event("5","grocery","hobbies","11/10/2021")
-//    var event2:Event = Event("45","emergency","hospital","01/08/1998")
-//    var event3:Event = Event("17","sport","soccer","07/04/2006")
-//    var event4:Event = Event("13","family","mother","03/04/1992")
-//    var event5:Event = Event("79","travel","paris","01/04/1995")
-//    var event6:Event = Event("98","study","pays","09/04/2003")
-//    var data: ArrayList<Event> = arrayListOf()
-//
-//    fun addAllList(){
-//        data.add(event0)
-//        data.add(event1)
-//        data.add(event2)
-//        data.add(event3)
-//        data.add(event4)
-//        data.add(event5)
-//        data.add(event6)
-//    }
-
-
-    //DATA
-
     private lateinit var communicator: Communicator
+    private lateinit var eventAdapterListener: EventAdapterListener
     private  var c= 0
     private val binding by lazy {
         FragmentDataBinding.inflate(layoutInflater)
@@ -61,12 +39,13 @@ class DataFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         communicator = activity as Communicator
+        eventAdapterListener = activity as EventAdapterListener
 
        // addAllList()
     }
 
     private val eventAdapter by lazy {
-        EventAdapter(communicator)
+        EventAdapter(eventAdapterListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +54,16 @@ class DataFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        for (i in 0 until (Data.listEvent.size )){
+
+            eventAdapter.updateEventData(Data.listEvent[i])
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -90,16 +79,6 @@ class DataFragment : Fragment() {
 
         Log.d("LIST_SIZE",Data.listEvent.size.toString())
 
-        for (i in 0 until (Data.listEvent.size )){
-
-            eventAdapter.updateEventData(Data.listEvent[i])
-        }
-
-        //ADDING NEW ITEM
-//        binding.btnAddEvent.setOnClickListener {
-//            eventAdapter.updateEventData(Event("id ${c}","hola ${c}","mundo","como"))
-//            c++
-//        }
 
         //CALL FRAGMENT CALENDAR
         binding.btnAddEvent.setOnClickListener {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.john.calendarevent.adapter.EventAdapterListener
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.model.Event
 import com.john.calendarevent.views.CalendarFragment
@@ -12,7 +13,7 @@ import com.john.calendarevent.views.ConsultFragment
 import com.john.calendarevent.views.DataFragment
 
 
-class MainActivity : AppCompatActivity(), Communicator{
+class MainActivity : AppCompatActivity(), Communicator,EventAdapterListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity(), Communicator{
             .commit()
     }
 
-    override fun swithConsultFragment(id:String) {
+    override fun onFragmentCliked(id: String) {
         Log.d("READING_ID=","${id}")
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment,ConsultFragment.newInstance(id,""))
