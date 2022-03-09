@@ -8,6 +8,7 @@ import com.john.calendarevent.data.Data
 import com.john.calendarevent.model.Event
 import com.john.calendarevent.views.CalendarFragment
 import com.john.calendarevent.views.Communicator
+import com.john.calendarevent.views.ConsultFragment
 import com.john.calendarevent.views.DataFragment
 
 
@@ -30,6 +31,14 @@ class MainActivity : AppCompatActivity(), Communicator{
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment,DataFragment.newInstance("",""))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun swithConsultFragment(id:String) {
+        Log.d("READING_ID=","${id}")
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragment,ConsultFragment.newInstance("",""))
             .addToBackStack(null)
             .commit()
     }
