@@ -19,7 +19,7 @@ class EventAdapter (
         eventList.add(0,event)
 
         //Order Data Here
-        notifyItemInserted(3)
+        notifyItemInserted(0)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val eventView = LayoutInflater.from(parent.context).inflate(R.layout.event_item,parent,false)
@@ -48,7 +48,7 @@ class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
     fun bind(event:Event){
         title.text = event.title
         category.text = event.category
-        calendary.text = event.calendary
+        calendary.text = event.calendar
         id=""
     }
 }

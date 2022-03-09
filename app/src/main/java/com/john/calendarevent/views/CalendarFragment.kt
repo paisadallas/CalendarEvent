@@ -2,12 +2,17 @@ package com.john.calendarevent.views
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
 import com.john.calendarevent.R
+import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentCalendarBinding
+import com.john.calendarevent.model.Event
+import java.text.SimpleDateFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +31,8 @@ class CalendarFragment : Fragment() {
 
     private lateinit var binding : FragmentCalendarBinding
     private lateinit var communicator: Communicator
-
+   //SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+    var sdf:SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,8 +55,30 @@ class CalendarFragment : Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater,container,false)
 
         binding.btCancel.setOnClickListener {
+
+         //   Data.event_data = "CalendarFragment"
+          //  Log.d("READING_DATA","Reading data from Calendar: ${Data.event_data}")
             communicator.swithDataFragment()
         }
+
+            binding.calendarView.setOnDateChangeListener { p0, p1, p2, p3 ->
+                Log.d("DAY_CALENDAR", "$p1$p2$p3")
+                var title: String = binding.etEvent.text.toString()
+                var category: String = binding.etCategory.text.toString()
+
+                var date = "$p3/$p2/$p1"
+
+                binding.btOkEvent.setOnClickListener {
+                    var event: Event = Event("001", title, category, date)
+                    Data.listEvent?.add(event)
+                    communicator.swithDataFragment()
+                }
+
+            }
+            // Log.d("DAY_CALENDAR",date)
+
+            Log.d("LIST_SIZE",Data.listEvent?.size.toString())
+
         return binding.root
     }
 
