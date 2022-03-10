@@ -7,7 +7,7 @@ import com.john.calendarevent.R
 fun fragmentNavigation(supportFragmentManager:FragmentManager, fragment: Fragment) {
 
     supportFragmentManager.beginTransaction()
-    .replace(R.id.main_fragment,fragment)
+    .replace(R.id.fragmentContainerView,fragment)
     .addToBackStack(fragment.id.toString())
     .commit()
 

@@ -3,35 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
-
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.john.calendarevent.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
-    <fragment
-        android:id="@+id/dataFragment"
-        android:name="com.john.calendarevent.views.DataFragment"
-        android:label="DataFragment" >
-        <action
-            android:id="@+id/action_dataFragment_to_consultFragment"
-            app:destination="@id/consultFragment" />
-        <action
-            android:id="@+id/action_dataFragment_to_calendarFragment"
-            app:destination="@id/calendarFragment" />
-    </fragment>
+    app:startDestination="@id/dataFragment">
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.john.calendarevent.views.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" >
-        <action
-            android:id="@+id/action_calendarFragment_to_dataFragment"
-            app:destination="@id/dataFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_calendar" />
     <fragment
-        android:id="@+id/consultFragment"
+        android:id="@+id/dataFragment"
+        android:name="com.john.calendarevent.views.DataFragment"
+        android:label="DataFragment" />
+    <fragment
+        android:id="@+id/consultFragment2"
         android:name="com.john.calendarevent.views.ConsultFragment"
-        android:label="ConsultFragment" />
+        android:label="ConsultFragment" >
+        <argument
+            android:name="my_id"
+            app:argType="string" />
+    </fragment>
 </navigation>
