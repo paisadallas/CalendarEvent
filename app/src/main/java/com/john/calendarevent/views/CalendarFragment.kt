@@ -8,12 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.john.calendarevent.R
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentCalendarBinding
 import com.john.calendarevent.model.Event
 import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
@@ -47,13 +50,20 @@ class CalendarFragment : Fragment() {
             )
         }
 
+     //   SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD")
+        var formatter = SimpleDateFormat("yyyy-MM-dd")
             binding.calendarView.setOnDateChangeListener { _, p1, p2, p3 ->
                val id: UUID = UUID.randomUUID()
-                Log.d("DAY_CALENDAR", "$p1$p2$p3")
+
                 var title: String = binding.etEvent.text.toString()
                 var category: String = binding.etCategory.text.toString()
 
                 var date = "$p3/$p2/$p1"
+
+                 var myDate :Date =  formatter.parse("2022-02-20")
+                var mill = myDate.time as Long
+                Log.d("TIME_LONG","${mill}")
+
 
                 binding.btOkEvent.setOnClickListener {
                     var event= Event(id.toString(), title, category, date)
@@ -63,7 +73,15 @@ class CalendarFragment : Fragment() {
                         DataFragment()
                     )
                 }
+
             }
+
+        var cale :Calendar = Calendar.getInstance()
+        cale.set(2022,3,15)
+        var date = 1645333200000
+
+        binding.calendarView.setDate(date,true,true)
+
         return binding.root
     }
 }

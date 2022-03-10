@@ -8,4 +8,7 @@
     <string name="et_category">Category</string>
     <string name="et_event">Event</string>
     <string name="title_calendar">Create event</string>
+    <string name="category">Category</string>
+    <string name="title_consult">Consult event</string>
+    <string name="event">Event</string>
 </resources>
