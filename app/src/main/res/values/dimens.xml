@@ -7,4 +7,14 @@
     <dimen name="margin_event">50dp</dimen>
     <dimen name="text_event">40sp</dimen>
     <dimen name="category_size">30sp</dimen>
+    <dimen name="event_size">20sp</dimen>
+    <dimen name="margin_left_item">20dp</dimen>
+    <dimen name="category_size_item">20sp</dimen>
+    <dimen name="event_size_item">25sp</dimen>
+    <dimen name="radius_item">10dp</dimen>
+    <dimen name="margin_left_item_container">5dp</dimen>
+    <dimen name="margin_right_item_container">5dp</dimen>
+    <dimen name="elevation_item">7dp</dimen>
+    <dimen name="margin_button_item">3dp</dimen>
+    <dimen name="margin_button_calendar">5dp</dimen>
 </resources>

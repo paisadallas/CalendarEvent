@@ -2,29 +2,26 @@ package com.john.calendarevent.views
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import androidx.core.view.get
-import androidx.navigation.fragment.findNavController
-import com.john.calendarevent.R
+import android.widget.Button
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentCalendarBinding
 import com.john.calendarevent.model.Event
 import java.text.SimpleDateFormat
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
 
     private lateinit var binding : FragmentCalendarBinding
-
-   //SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private var date: String = formatter.format(Date())
+    private lateinit var event:Event
+    val id: UUID = UUID.randomUUID()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,8 +36,7 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_calendar, container, false)
+
         binding = FragmentCalendarBinding.inflate(inflater,container,false)
 
         binding.btCancel.setOnClickListener {
@@ -48,40 +44,94 @@ class CalendarFragment : Fragment() {
                 supportFragmentManager = requireActivity().supportFragmentManager,
                 DataFragment()
             )
+
         }
 
-     //   SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD")
-        var formatter = SimpleDateFormat("yyyy-MM-dd")
+        enableButton(binding.etEvent,binding.etCategory,binding.btOkEvent)
+
+
+        var current_day = formatter.format(Date())
+
+
             binding.calendarView.setOnDateChangeListener { _, p1, p2, p3 ->
-               val id: UUID = UUID.randomUUID()
 
-                var title: String = binding.etEvent.text.toString()
-                var category: String = binding.etCategory.text.toString()
+                 this.date = "${p3}/${p2+1}/$p1"
 
-                var date = "$p3/$p2/$p1"
+              //   var myDate :Date =  formatter.parse("07-01-2022")
+              //  var mill = myDate.time as Long
+              //  Log.d("TIME_LONG","${mill}")
 
-                 var myDate :Date =  formatter.parse("2022-02-20")
-                var mill = myDate.time as Long
-                Log.d("TIME_LONG","${mill}")
-
-
+                /*
                 binding.btOkEvent.setOnClickListener {
-                    var event= Event(id.toString(), title, category, date)
+                     event= Event("$id", "${binding.etEvent.text}", "${binding.etCategory.text}", date)
                     Data.listEvent.add(event)
                     fragmentNavigation(
                         supportFragmentManager = requireActivity().supportFragmentManager,
                         DataFragment()
                     )
                 }
+                */
+                sendData("${binding.etEvent.text}","${binding.etCategory.text}",date)
 
             }
 
-        var cale :Calendar = Calendar.getInstance()
-        cale.set(2022,3,15)
-        var date = 1645333200000
+
+
+        //val my_date = SimpleDateFormat("dd")
+        val my_month = SimpleDateFormat("MM")
+        val my_year = SimpleDateFormat("yyyy")
+       // val currentDate = my_date.format(Date())
+        val currentMonth = my_month.format(Date())
+        val currenYear = my_year.format(Date())
+      //  System.out.println(" C DATE is  "+currentDate)
+
+
+
+      //  Log.d("TIME_DAY","${currentDate} ${currentMonth} ${currenYear}")
+        var date = 1641531600000
 
         binding.calendarView.setDate(date,true,true)
 
         return binding.root
+    }
+
+    private fun enableButton(etEvent: EditText, etCategory: EditText, btOkEvent: Button){
+
+        //Listen etEvent
+        etEvent.doAfterTextChanged { itEvent ->
+
+            if ("$itEvent" !=""){
+                etCategory.doAfterTextChanged {itCategory ->
+                    btOkEvent.isEnabled = "$itCategory" != ""
+                    sendData("${itEvent}","${itCategory}",this.date)
+                }
+            }else{
+                btOkEvent.isEnabled = false
+            }
+        }
+
+        //Listen etCategory
+        etCategory.doAfterTextChanged { itCategory ->
+
+            if ("$itCategory" !=""){
+                etEvent.doAfterTextChanged {itEvent ->
+                    btOkEvent.isEnabled = "$itEvent" != ""
+                    sendData("${itEvent}","${itCategory}",this.date)
+                }
+            }else{
+                btOkEvent.isEnabled = false
+            }
+        }
+    }
+
+    private fun sendData(etEvent: String, etCategory: String, date: String) {
+        binding.btOkEvent.setOnClickListener {
+            event= Event("$id", etEvent, etCategory, date)
+            Data.listEvent.add(event)
+            fragmentNavigation(
+                supportFragmentManager = requireActivity().supportFragmentManager,
+                DataFragment()
+            )
+        }
     }
 }
