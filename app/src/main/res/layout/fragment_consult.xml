@@ -38,20 +38,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <CalendarView
-            android:id="@+id/calendar_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            tools:layout_editor_absoluteX="30dp" />
         <TextView
             android:id="@+id/tv_item_calendar"
             android:text="date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_left_item"
+            android:textAlignment="center"/>
+
+        <CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_calendar"
+            tools:layout_editor_absoluteX="30dp" />
+
         <Button
             android:id="@+id/bt_delete"
-
+            android:layout_gravity="center"
             android:text="Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

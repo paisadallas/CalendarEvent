@@ -67,6 +67,7 @@ class ConsultFragment : Fragment() {
 
         return binding.root
     }
+
     companion object {
 
         @JvmStatic
