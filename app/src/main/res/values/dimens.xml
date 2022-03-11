@@ -4,7 +4,7 @@
     <dimen name="margin_right">30dp</dimen>
     <dimen name="margin_button">40dp</dimen>
     <dimen name="title_size">30sp</dimen>
-    <dimen name="margin_event">50dp</dimen>
+    <dimen name="margin_event">30dp</dimen>
     <dimen name="text_event">40sp</dimen>
     <dimen name="category_size">30sp</dimen>
     <dimen name="event_size">20sp</dimen>
@@ -17,4 +17,5 @@
     <dimen name="elevation_item">7dp</dimen>
     <dimen name="margin_button_item">3dp</dimen>
     <dimen name="margin_button_calendar">5dp</dimen>
+    <dimen name="margin_top_calendar">20dp</dimen>
 </resources>
