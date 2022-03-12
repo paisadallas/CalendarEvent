@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
+import androidx.room.Room
 import com.john.calendarevent.data.Data
+import com.john.calendarevent.data_base.EventDataBase
 import com.john.calendarevent.databinding.FragmentCalendarBinding
 import com.john.calendarevent.model.Event
 import java.text.SimpleDateFormat
@@ -22,9 +24,9 @@ class CalendarFragment : Fragment() {
     private var date: String = formatter.format(Date())
     private lateinit var event:Event
     val id: UUID = UUID.randomUUID()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -88,10 +90,19 @@ class CalendarFragment : Fragment() {
         }
     }
 
+    /**
+     * Save Event in DATABASE
+     */
     private fun sendData(etEvent: String, etCategory: String, date: String) {
+      //  val db = Room.databaseBuilder(requireContext(), EventDataBase::class.java, "data_base").build()
+     //   val evenDao = db.getEventsDAO()
+
+        //ADD EVENT
         binding.btOkEvent.setOnClickListener {
             event= Event("$id", etEvent, etCategory, date)
-            Data.listEvent.add(event)
+        //    evenDao.insertEvent(event)
+          Data.listEvent.add(event) //LOCAL
+
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
                 DataFragment()
