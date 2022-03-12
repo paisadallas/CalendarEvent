@@ -27,11 +27,6 @@ class CalendarFragment : Fragment() {
 
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,50 +42,19 @@ class CalendarFragment : Fragment() {
 
         }
 
+        binding.calendarView.apply {
+            minDate = date
+        }
+
         enableButton(binding.etEvent,binding.etCategory,binding.btOkEvent)
-
-
-        var current_day = formatter.format(Date())
-
 
             binding.calendarView.setOnDateChangeListener { _, p1, p2, p3 ->
 
                  this.date = "${p3}/${p2+1}/$p1"
 
-              //   var myDate :Date =  formatter.parse("07-01-2022")
-              //  var mill = myDate.time as Long
-              //  Log.d("TIME_LONG","${mill}")
-
-                /*
-                binding.btOkEvent.setOnClickListener {
-                     event= Event("$id", "${binding.etEvent.text}", "${binding.etCategory.text}", date)
-                    Data.listEvent.add(event)
-                    fragmentNavigation(
-                        supportFragmentManager = requireActivity().supportFragmentManager,
-                        DataFragment()
-                    )
-                }
-                */
                 sendData("${binding.etEvent.text}","${binding.etCategory.text}",date)
 
             }
-
-
-
-        //val my_date = SimpleDateFormat("dd")
-        val my_month = SimpleDateFormat("MM")
-        val my_year = SimpleDateFormat("yyyy")
-       // val currentDate = my_date.format(Date())
-        val currentMonth = my_month.format(Date())
-        val currenYear = my_year.format(Date())
-      //  System.out.println(" C DATE is  "+currentDate)
-
-
-
-      //  Log.d("TIME_DAY","${currentDate} ${currentMonth} ${currenYear}")
-        var date = 1641531600000
-
-        binding.calendarView.setDate(date,true,true)
 
         return binding.root
     }

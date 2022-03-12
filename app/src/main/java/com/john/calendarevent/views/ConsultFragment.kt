@@ -63,6 +63,14 @@ class ConsultFragment : Fragment() {
 
         }
 
+        binding.calendarView.apply {
+            minDate = date
+            val formatter = SimpleDateFormat("dd/MM/yyyy")
+            var date : Date? = formatter.parse("${Data.listEvent[deleteItem].calendar}")
+            var dateEvent = date?.time as Long
+            setDate(dateEvent,true,true)
+        }
+
         binding.btDelete.setOnClickListener {
             Data.listEvent.removeAt(deleteItem)
             fragmentNavigation(
