@@ -75,7 +75,7 @@ class ConsultFragment : Fragment() {
     }
 
     fun remainingDays(today:String, evendDay:String): String{
-
+        return ""
     }
 
     companion object {
