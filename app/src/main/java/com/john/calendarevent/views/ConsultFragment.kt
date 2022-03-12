@@ -15,11 +15,16 @@ import com.john.calendarevent.R
 import com.john.calendarevent.adapter.EventAdapterListener
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentConsultBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
 
 class ConsultFragment : Fragment() {
+
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private var date: String = formatter.format(Date())
 
     private var param1: String? = null
     lateinit var eventAdapterListener:EventAdapterListener
@@ -51,10 +56,19 @@ class ConsultFragment : Fragment() {
                 Log.d("CONSULT_FRAGMENT_TITLE","${Data.listEvent[i].title}")
                 binding.tvTitle.text= Data.listEvent[i].title
                 binding.tvCategory.text = Data.listEvent[i].category
-                binding.tvItemCalendar.text = Data.listEvent[i].calendar
+               // binding.tvItemRemaining.text = Data.listEvent[i].calendar
+                binding.tvItemRemaining.text=  remainingDays(this.date,"${Data.listEvent[i].calendar}")
                 deleteItem = i
             }
 
+        }
+
+        binding.calendarView.apply {
+            minDate = date
+            val formatter = SimpleDateFormat("dd/MM/yyyy")
+            var date : Date? = formatter.parse("${Data.listEvent[deleteItem].calendar}")
+            var dateEvent = date?.time as Long
+            setDate(dateEvent,true,true)
         }
 
         binding.btDelete.setOnClickListener {
@@ -66,6 +80,19 @@ class ConsultFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun remainingDays(today:String, evenDay:String): String{
+
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        var date1 : Date? = formatter.parse(today)
+        var date2 : Date?= formatter.parse(evenDay)
+        var diferent = date2?.getTime()?.minus(date1?.getTime()!!)
+        var diferentString = diferent?.div(86400000)
+        if (diferentString == 0L){
+            return "Today"
+        }
+        return "Remaining days $diferentString"
     }
 
     companion object {
