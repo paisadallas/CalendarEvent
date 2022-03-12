@@ -33,17 +33,12 @@ class MainActivity : AppCompatActivity(),EventAdapterListener{
         }
 }
 
-    //Note
-//Garbas colector check
-    //When get access to fragment I have to declare null
-
     override fun onFragmentCliked(id: String) {
         Log.d("READING_ID=","${id}")
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView,ConsultFragment.newInstance(id),"DATA")
             .addToBackStack("DATA")
             .commit()
-
     }
 
 }

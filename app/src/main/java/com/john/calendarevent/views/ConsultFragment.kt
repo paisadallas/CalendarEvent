@@ -50,7 +50,7 @@ class ConsultFragment : Fragment() {
     ): View? {
 
 
-        var  deleteItem:Int =0
+        var  deleteItem =0
         for (i in 0 until (Data.listEvent.size )){
             if (Data.listEvent[i].id.equals(param1)){
                 Log.d("CONSULT_FRAGMENT_TITLE","${Data.listEvent[i].title}")
