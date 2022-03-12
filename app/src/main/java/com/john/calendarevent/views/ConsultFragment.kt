@@ -15,11 +15,16 @@ import com.john.calendarevent.R
 import com.john.calendarevent.adapter.EventAdapterListener
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentConsultBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
 
 class ConsultFragment : Fragment() {
+
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private var date: String = formatter.format(Date())
 
     private var param1: String? = null
     lateinit var eventAdapterListener:EventAdapterListener
@@ -65,7 +70,12 @@ class ConsultFragment : Fragment() {
             )
         }
 
+
         return binding.root
+    }
+
+    fun remainingDays(today:String, evendDay:String): String{
+
     }
 
     companion object {
