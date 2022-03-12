@@ -56,7 +56,8 @@ class ConsultFragment : Fragment() {
                 Log.d("CONSULT_FRAGMENT_TITLE","${Data.listEvent[i].title}")
                 binding.tvTitle.text= Data.listEvent[i].title
                 binding.tvCategory.text = Data.listEvent[i].category
-                binding.tvItemCalendar.text = Data.listEvent[i].calendar
+               // binding.tvItemRemaining.text = Data.listEvent[i].calendar
+                binding.tvItemRemaining.text=  remainingDays(this.date,"${Data.listEvent[i].calendar}")
                 deleteItem = i
             }
 
@@ -70,12 +71,20 @@ class ConsultFragment : Fragment() {
             )
         }
 
-
         return binding.root
     }
 
-    fun remainingDays(today:String, evendDay:String): String{
-        return ""
+    fun remainingDays(today:String, evenDay:String): String{
+
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        var date1 : Date? = formatter.parse(today)
+        var date2 : Date?= formatter.parse(evenDay)
+        var diferent = date2?.getTime()?.minus(date1?.getTime()!!)
+        var diferentString = diferent?.div(86400000)
+        if (diferentString == 0L){
+            return "Today"
+        }
+        return "Remaining days $diferentString"
     }
 
     companion object {
