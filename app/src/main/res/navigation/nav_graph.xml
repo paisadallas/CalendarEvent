@@ -4,15 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/dataFragment">
+
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.john.calendarevent.views.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar">
+
+        <action
+            android:id="@+id/action_calendar_to_data"
+            app:destination="@id/dataFragment"/>
+
+        <action
+            android:id="@+id/action_calendar_to_details"
+            app:destination="@id/consultFragment2"/>
+    </fragment>
+
     <fragment
         android:id="@+id/dataFragment"
         android:name="com.john.calendarevent.views.DataFragment"
-        android:label="DataFragment" />
+        android:label="DataFragment">
+
+        <action
+            android:id="@+id/action_data_to_calendar"
+            app:destination="@id/calendarFragment"/>
+    </fragment>
+
     <fragment
         android:id="@+id/consultFragment2"
         android:name="com.john.calendarevent.views.ConsultFragment"
@@ -20,5 +37,14 @@
         <argument
             android:name="my_id"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_details_to_calendar"
+            app:destination="@id/calendarFragment"/>
+
+        <action
+            android:id="@+id/action_details_to_data"
+            app:destination="@id/dataFragment"/>
+
     </fragment>
 </navigation>
