@@ -25,16 +25,16 @@ class MainActivity : AppCompatActivity(),EventAdapterListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null){
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView,DataFragment())
-                .addToBackStack(null)
-                .commit()
-        }
+//        if (savedInstanceState == null){
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.fragmentContainerView,DataFragment())
+//                .addToBackStack(null)
+//                .commit()
+//        }
 }
 
     override fun onFragmentCliked(id: String) {
-        Log.d("READING_ID=","${id}")
+        Log.d("READING_ID=", id)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView,ConsultFragment.newInstance(id),"DATA")
             .addToBackStack("DATA")

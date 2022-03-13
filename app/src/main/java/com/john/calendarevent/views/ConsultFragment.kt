@@ -65,30 +65,26 @@ class ConsultFragment : Fragment() {
 
         binding.calendarView.apply {
             minDate = date
-            val formatter = SimpleDateFormat("dd/MM/yyyy")
-            var date : Date? = formatter.parse("${Data.listEvent[deleteItem].calendar}")
-            var dateEvent = date?.time as Long
+            val date : Date? = formatter.parse("${Data.listEvent[deleteItem].calendar}")
+            val dateEvent = date?.time as Long
             setDate(dateEvent,true,true)
         }
 
         binding.btDelete.setOnClickListener {
             Data.listEvent.removeAt(deleteItem)
-            fragmentNavigation(
-                supportFragmentManager = requireActivity().supportFragmentManager,
-                DataFragment()
-            )
+            findNavController().navigate(R.id.action_details_to_data)
         }
 
         return binding.root
     }
 
     fun remainingDays(today:String, evenDay:String): String{
+        val date1 = formatter.parse(today)
+        val date2 = formatter.parse(evenDay)
 
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
-        var date1 : Date? = formatter.parse(today)
-        var date2 : Date?= formatter.parse(evenDay)
-        var diferent = date2?.getTime()?.minus(date1?.getTime()!!)
-        var diferentString = diferent?.div(86400000)
+        val diferent = date2?.time?.minus(date1?.time!!)
+        val diferentString = diferent?.div(86400000)
+
         if (diferentString == 0L){
             return "Today"
         }

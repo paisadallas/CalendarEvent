@@ -62,12 +62,7 @@ class DataFragment : Fragment() {
      //   val view = binding.root
       //  var navController=Navigation.findNavController(MainActivity()!!, R.id.nav_graph)
         binding.btnAddEvent.setOnClickListener {
-
-            fragmentNavigation(
-                supportFragmentManager = requireActivity().supportFragmentManager,
-                CalendarFragment()
-            )
-
+            findNavController().navigate(R.id.action_data_to_calendar)
         }
 
 

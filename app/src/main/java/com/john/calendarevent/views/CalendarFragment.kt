@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
+import com.john.calendarevent.R
 import com.john.calendarevent.data.Data
 import com.john.calendarevent.databinding.FragmentCalendarBinding
 import com.john.calendarevent.model.Event
@@ -35,11 +37,7 @@ class CalendarFragment : Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater,container,false)
 
         binding.btCancel.setOnClickListener {
-            fragmentNavigation(
-                supportFragmentManager = requireActivity().supportFragmentManager,
-                DataFragment()
-            )
-
+            findNavController().navigate(R.id.action_calendar_to_data)
         }
 
         binding.calendarView.apply {
@@ -67,7 +65,7 @@ class CalendarFragment : Fragment() {
             if ("$itEvent" !=""){
                 etCategory.doAfterTextChanged {itCategory ->
                     btOkEvent.isEnabled = "$itCategory" != ""
-                    sendData("${itEvent}","${itCategory}",this.date)
+                    sendData("$itEvent","$itCategory",this.date)
                 }
             }else{
                 btOkEvent.isEnabled = false
@@ -80,7 +78,7 @@ class CalendarFragment : Fragment() {
             if ("$itCategory" !=""){
                 etEvent.doAfterTextChanged {itEvent ->
                     btOkEvent.isEnabled = "$itEvent" != ""
-                    sendData("${itEvent}","${itCategory}",this.date)
+                    sendData("$itEvent","$itCategory",this.date)
                 }
             }else{
                 btOkEvent.isEnabled = false
@@ -92,10 +90,8 @@ class CalendarFragment : Fragment() {
         binding.btOkEvent.setOnClickListener {
             event= Event("$id", etEvent, etCategory, date)
             Data.listEvent.add(event)
-            fragmentNavigation(
-                supportFragmentManager = requireActivity().supportFragmentManager,
-                DataFragment()
-            )
+
+            findNavController().navigate(R.id.action_calendar_to_data)
         }
     }
 }

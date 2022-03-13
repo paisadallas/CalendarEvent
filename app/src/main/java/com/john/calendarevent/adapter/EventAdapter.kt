@@ -30,6 +30,7 @@ class EventAdapter (
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        eventList.sortBy { it.calendar }
         val event = eventList[position]
         holder.itemView.setOnClickListener {
 
@@ -49,6 +50,7 @@ class EventViewHolder (intentView: View): RecyclerView.ViewHolder(intentView){
     private val category :TextView = intentView.findViewById(R.id.tv_item_category)
     private val calendary : TextView = intentView.findViewById(R.id.tv_item_calendar)
     private var id : String? =""
+
     fun bind(event:Event){
         title.text = event.title
         category.text = event.category
